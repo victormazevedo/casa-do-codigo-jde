@@ -1,9 +1,6 @@
 package com.deveficiente.casadocodigo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -21,6 +18,7 @@ public class Author {
 
     @NotBlank
     @Email(message = "Enter a valid email, please.")
+    @Column(unique = true)
     private String email;
 
     @NotBlank
