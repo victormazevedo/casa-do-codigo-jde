@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
-@RequestMapping("/author")
+@RequestMapping("/v1/author")
 public class AuthorController {
     //1
     private final AuthorRepository authorRepository;
