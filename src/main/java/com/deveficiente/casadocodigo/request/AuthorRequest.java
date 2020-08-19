@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 public class AuthorRequest {
 
     @NotBlank
-    private final String nome;
+    private final String name;
     @NotBlank
     @Email
     private final String email;
@@ -17,20 +17,20 @@ public class AuthorRequest {
     @Size(max = 400)
     private final String description;
 
-    public AuthorRequest(@NotBlank String nome,
+    public AuthorRequest(@NotBlank String name,
                          @NotBlank @Email String email,
                          @NotBlank @Size(max = 400) String description) {
-        this.nome = nome;
+        this.name = name;
         this.email = email;
         this.description = description;
     }
 
     public Author toModel() {
-        return new Author(nome, email, description);
+        return new Author(name, email, description);
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
     public String getEmail() {
@@ -44,7 +44,7 @@ public class AuthorRequest {
     @Override
     public String toString() {
         return "AuthorRequest{" +
-                "nome='" + nome + '\'' +
+                "nome='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
                 '}';

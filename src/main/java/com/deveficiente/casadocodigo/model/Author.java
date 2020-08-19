@@ -13,7 +13,7 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name null")
+    @NotBlank
     private String name;
 
     @NotBlank
@@ -29,7 +29,7 @@ public class Author {
 
     protected Author() {}
 
-    public Author(@NotBlank(message = "Name null") String name,
+    public Author(@NotBlank String name,
                   @NotBlank @Email(message = "Enter a valid email, please.") String email,
                   @NotBlank @Size(max = 400, message = "Description must have a max of 400 characters") String description) {
         this.name = name;
