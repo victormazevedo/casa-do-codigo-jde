@@ -17,12 +17,10 @@ public class Author {
     private String name;
 
     @NotBlank
-    @Email(message = "Enter a valid email, please.")
-    @Column(unique = true)
     private String email;
 
     @NotBlank
-    @Size(max = 400, message = "Description must have 400 characters")
+    @Size(max = 400)
     private String description;
 
     private LocalDateTime instant;
@@ -30,8 +28,8 @@ public class Author {
     protected Author() {}
 
     public Author(@NotBlank String name,
-                  @NotBlank @Email(message = "Enter a valid email, please.") String email,
-                  @NotBlank @Size(max = 400, message = "Description must have a max of 400 characters") String description) {
+                  @NotBlank String email,
+                  @NotBlank @Size(max = 400) String description) {
         this.name = name;
         this.email = email;
         this.description = description;
