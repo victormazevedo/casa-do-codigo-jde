@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,9 +35,18 @@ public class AuthorControllerTest {
 
     @Test
     public void testSuccessWhenCreateANewAuthor() throws Exception {
-        AuthorRequest authorRequest = new AuthorRequest("Victor", "victor@gmail.com", "Victor é graduado pela Fatec");
+        AuthorRequest authorRequest = new AuthorRequest("Victor", "victor@gmail.com.br", "Victor é graduado pela Fatec");
         String requestBody = objectMapper.writeValueAsString(authorRequest);
-        mockMvc.perform(post(URL).contentType("application/json").content(requestBody)).andExpect(status().isCreated());
+        mockMvc.perform(post(URL).contentType("application/json").content(requestBody)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void failWithAlreadyExistsEmail() throws Exception {
+        AuthorRequest authorRequest = new AuthorRequest("Victor M", "victor@gmail.com", "Descrição do teste de email");
+        when(authorRepository.findByEmail("victor@gmail.com")).thenReturn(authorRequest.toModel());
+        String requestBody = objectMapper.writeValueAsString(authorRequest);
+        mockMvc.perform(post(URL).contentType("application/json").content(requestBody))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
