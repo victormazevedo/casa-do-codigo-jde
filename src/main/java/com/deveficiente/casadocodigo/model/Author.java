@@ -1,6 +1,9 @@
 package com.deveficiente.casadocodigo.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -28,18 +31,12 @@ public class Author {
     protected Author() {}
 
     public Author(@NotBlank String name,
-                  @NotBlank String email,
+                  @NotBlank @Email String email,
                   @NotBlank @Size(max = 400) String description) {
         this.name = name;
         this.email = email;
         this.description = description;
         this.instant = LocalDateTime.now();
-    }
-
-    public void updateAuthor(Author author) {
-        this.description = author.description;
-        this.name = author.name;
-        this.email = author.email;
     }
 
     public String getName() {
