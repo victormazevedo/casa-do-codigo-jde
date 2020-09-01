@@ -1,6 +1,7 @@
 package com.deveficiente.casadocodigo.request;
 
 import com.deveficiente.casadocodigo.model.Author;
+import com.deveficiente.casadocodigo.validator.UniqueValue;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
@@ -11,10 +12,13 @@ public class AuthorRequest {
 
     @NotBlank
     private final String name;
+
     @NotBlank
     @Email
     @Column(unique = true)
+    @UniqueValue(domainClass = Author.class, fieldName = "email")
     private final String email;
+
     @NotBlank
     @Size(max = 400)
     private final String description;
