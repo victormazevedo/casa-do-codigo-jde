@@ -28,6 +28,7 @@ public class Author {
 
     private LocalDateTime instant;
 
+    @Deprecated
     protected Author() {}
 
     public Author(@NotBlank String name,
